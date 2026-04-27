@@ -107,6 +107,24 @@ body {
   cursor: pointer;
 }
 
+/* Auth UI */
+.user-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-left: 8px;
+}
+
+.auth-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(180, 176, 166, 0.5);
+  background: transparent;
+  color: var(--text);
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
 /* Layout */
 .main-layout {
   display: grid;
