@@ -2,25 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BRAND_NAME Homework Calendar</title>
+  <title>Complete Calendar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#111827">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="HW Calendar">
-  <link rel="apple-touch-icon" href="./icon-512.png">
-
-  <link rel="stylesheet" href="./calendar.css">
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
-      });
-    }
-  </script>
+  <link rel="stylesheet" href="calendar.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#05060a">
 </head>
 <body>
   <div class="app">
@@ -29,45 +16,76 @@
         <div class="title-block">
           <div class="title-row">
             <div class="app-dot"></div>
-            <h1>Homework calendar</h1>
+            <h1>Complete Calendar</h1>
           </div>
-          <span class="subtitle">See your work laid out on a calendar.</span>
+          <span class="subtitle">
+            See your planner tasks laid out on a monthly calendar.
+          </span>
         </div>
+
         <div class="header-right">
-          <button class="nav-btn" onclick="goToPlanner()">List</button>
+          <button id="themeToggle" class="theme-toggle" type="button">
+            <span id="themeIcon">☾</span>
+            <span id="themeLabel">Dark</span>
+          </button>
         </div>
       </header>
 
-      <section class="month-header">
-        <button class="month-nav" onclick="changeMonth(-1)">‹</button>
-        <div class="month-title">
-          <span id="monthName"></span>
-          <span id="yearNum"></span>
-        </div>
-        <button class="month-nav" onclick="changeMonth(1)">›</button>
-      </section>
+      <main class="main-layout">
+        <section class="calendar-panel">
+          <div class="calendar-header">
+            <button id="prevMonth" class="nav-btn" type="button">‹</button>
+            <div class="month-label">
+              <span id="monthName"></span>
+              <span id="yearNumber"></span>
+            </div>
+            <button id="nextMonth" class="nav-btn" type="button">›</button>
+          </div>
 
-      <section class="calendar-card">
-        <div class="weekday-row">
-          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-        </div>
-        <div id="daysGrid" class="days-grid"></div>
-      </section>
+          <div class="weekday-row">
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+          </div>
 
-      <section class="detail-card">
-        <div class="detail-header">
-          <span id="detailDateLabel">Select a day</span>
-          <span id="detailCount">0 tasks</span>
-        </div>
-        <ul id="detailList" class="detail-list"></ul>
-      </section>
+          <div id="calendarGrid" class="calendar-grid"></div>
+        </section>
 
-      <p class="footer-hint">
-        This calendar reads tasks from your planner (same device, same browser).
-      </p>
+        <aside class="side-panel">
+          <div class="side-card">
+            <div class="side-header">
+              <span class="side-title">Selected day</span>
+              <span class="side-date" id="selectedDateLabel">Select a day</span>
+            </div>
+            <p class="side-count"><span id="selectedCount">0</span> tasks</p>
+            <ul id="selectedList" class="task-list"></ul>
+            <p class="side-empty" id="selectedEmpty">No tasks for this day.</p>
+          </div>
+
+          <div class="side-card">
+            <div class="side-header">
+              <span class="side-title">From your planner</span>
+            </div>
+            <p class="side-note">
+              This calendar reads tasks from your Complete planner (same device, same browser).
+            </p>
+          </div>
+        </aside>
+      </main>
     </div>
   </div>
 
-  <script src="./calendar.js"></script>
+  <script src="calendar.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch((err) => {
+        console.error("Service worker registration failed", err);
+      });
+    }
+  </script>
 </body>
 </html>
