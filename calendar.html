@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRAND_NAME Homework Calendar</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#111827">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="HW Calendar">
+  <link rel="apple-touch-icon" href="./icon-512.png">
+
+  <link rel="stylesheet" href="./calendar.css">
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+</head>
+<body>
+  <div class="app">
+    <div class="shell">
+      <header class="header">
+        <div class="title-block">
+          <div class="title-row">
+            <div class="app-dot"></div>
+            <h1>Homework calendar</h1>
+          </div>
+          <span class="subtitle">See your work laid out on a calendar.</span>
+        </div>
+        <div class="header-right">
+          <button class="nav-btn" onclick="goToPlanner()">List</button>
+        </div>
+      </header>
+
+      <section class="month-header">
+        <button class="month-nav" onclick="changeMonth(-1)">‹</button>
+        <div class="month-title">
+          <span id="monthName"></span>
+          <span id="yearNum"></span>
+        </div>
+        <button class="month-nav" onclick="changeMonth(1)">›</button>
+      </section>
+
+      <section class="calendar-card">
+        <div class="weekday-row">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+        <div id="daysGrid" class="days-grid"></div>
+      </section>
+
+      <section class="detail-card">
+        <div class="detail-header">
+          <span id="detailDateLabel">Select a day</span>
+          <span id="detailCount">0 tasks</span>
+        </div>
+        <ul id="detailList" class="detail-list"></ul>
+      </section>
+
+      <p class="footer-hint">
+        This calendar reads tasks from your planner (same device, same browser).
+      </p>
+    </div>
+  </div>
+
+  <script src="./calendar.js"></script>
+</body>
+</html>
