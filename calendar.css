@@ -1,0 +1,267 @@
+:root {
+  --bg: #020617;
+  --card: #0f172a;
+  --card-light: #111827;
+  --accent: #4f46e5;
+  --accent-soft: rgba(79, 70, 229, 0.15);
+  --danger: #ef4444;
+  --text-main: #e5e7eb;
+  --text-soft: #9ca3af;
+  --radius-lg: 18px;
+  --radius-sm: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #1f2937 0, var(--bg) 55%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.app {
+  width: 100%;
+  max-width: 460px;
+  padding: 16px 16px 24px;
+}
+
+.shell {
+  background: rgba(15, 23, 42, 0.92);
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.8);
+  padding: 16px 14px 18px;
+  backdrop-filter: blur(20px);
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #a5b4fc, #4f46e5);
+  box-shadow: 0 0 8px rgba(129, 140, 248, 0.9);
+}
+
+h1 {
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-btn {
+  font-size: 0.78rem;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: var(--card-light);
+  color: var(--text-soft);
+  cursor: pointer;
+}
+
+/* Month header */
+
+.month-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.month-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#monthName {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  color: var(--text-main);
+}
+
+#yearNum {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.month-nav {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: var(--card-light);
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+/* Calendar card */
+
+.calendar-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 10px 10px 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.6);
+}
+
+.weekday-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 6px;
+  font-size: 0.7rem;
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.day-cell {
+  position: relative;
+  height: 40px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+.day-cell.outside {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.day-cell.today {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.7);
+}
+
+.day-cell.selected {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.day-dot {
+  position: absolute;
+  bottom: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+}
+
+.day-dot.overdue {
+  background: var(--danger);
+}
+
+.day-dot.due {
+  background: #facc15;
+}
+
+/* Detail card */
+
+.detail-card {
+  background: var(--card-light);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(75, 85, 99, 0.6);
+  padding: 10px 12px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+.detail-list {
+  list-style: none;
+}
+
+.detail-item {
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.7);
+  font-size: 0.85rem;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-item .task-text {
+  color: var(--text-main);
+}
+
+.detail-item .task-meta {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+}
+
+.footer-hint {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-soft);
+}
+
+@media (max-width: 480px) {
+  .shell {
+    border-radius: 20px;
+    padding: 14px 12px 16px;
+  }
+}
