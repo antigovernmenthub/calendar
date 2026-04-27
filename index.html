@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Complete Calendar</title>
+  <title>Complete Planner</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="calendar.css">
+  <link rel="stylesheet" href="planner.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#05060a">
 </head>
@@ -16,11 +16,9 @@
         <div class="title-block">
           <div class="title-row">
             <div class="app-dot"></div>
-            <h1>Complete Calendar</h1>
+            <h1>Complete Planner</h1>
           </div>
-          <span class="subtitle">
-            See your planner tasks laid out on a monthly calendar.
-          </span>
+          <span class="subtitle">Notebook-style homework and notes in one calm view.</span>
         </div>
 
         <div class="header-right">
@@ -34,54 +32,107 @@
       </header>
 
       <main class="main-layout">
-        <section class="calendar-panel">
-          <div class="calendar-header">
-            <button id="prevMonth" class="nav-btn" type="button">‹</button>
-            <div class="month-label">
-              <span id="monthName"></span>
-              <span id="yearNumber"></span>
+        <!-- Left column: tasks / notebook -->
+        <section class="notebook">
+          <div class="notebook-rings"></div>
+          <div class="notebook-inner">
+            <div class="notebook-header">
+              <div class="nh-left">
+                <span class="nh-label">Today</span>
+                <span class="nh-date" id="todayDisplay"></span>
+              </div>
+              <div class="nh-right">
+                <span class="nh-counter"><span id="taskCount">0</span> tasks</span>
+              </div>
             </div>
-            <button id="nextMonth" class="nav-btn" type="button">›</button>
-          </div>
 
-          <div class="weekday-row">
-            <span>Sun</span>
-            <span>Mon</span>
-            <span>Tue</span>
-            <span>Wed</span>
-            <span>Thu</span>
-            <span>Fri</span>
-            <span>Sat</span>
-          </div>
+            <!-- Add task row -->
+            <div class="task-input-row">
+              <input
+                id="taskInput"
+                type="text"
+                class="task-input"
+                placeholder="Write a new task…"
+                autocomplete="off"
+              />
+              <input id="dueInput" type="date" class="task-date" />
+              <select id="classSelect" class="task-class-select">
+                <option value="">No class</option>
+              </select>
+              <button class="add-btn" type="button" id="addTaskBtn">Add</button>
+            </div>
 
-          <div id="calendarGrid" class="calendar-grid"></div>
+            <!-- Class chips + add class -->
+            <div class="class-bar">
+              <div class="class-chips" id="classChips"></div>
+              <div class="class-add-row">
+                <input
+                  id="classInput"
+                  class="class-input"
+                  type="text"
+                  placeholder="Add a class (Algebra, English…)"
+                />
+                <button class="class-add-btn" type="button" id="addClassBtn">+ Class</button>
+              </div>
+            </div>
+
+            <!-- Task sections -->
+            <div class="sections">
+              <section class="section">
+                <div class="section-header">
+                  <span>Today</span>
+                  <span><span id="todayCount">0</span> due</span>
+                </div>
+                <ul id="list-today" class="task-list"></ul>
+                <p class="section-empty" id="todayEmpty">Nothing due today.</p>
+              </section>
+
+              <section class="section">
+                <div class="section-header">
+                  <span>Tomorrow</span>
+                  <span><span id="tomorrowCount">0</span> due</span>
+                </div>
+                <ul id="list-tomorrow" class="task-list"></ul>
+                <p class="section-empty" id="tomorrowEmpty">Tomorrow is clear.</p>
+              </section>
+
+              <section class="section">
+                <div class="section-header">
+                  <span>Upcoming</span>
+                  <span><span id="upcomingCount">0</span> tasks</span>
+                </div>
+                <ul id="list-upcoming" class="task-list"></ul>
+                <p class="section-empty" id="upcomingEmpty">No upcoming tasks yet.</p>
+              </section>
+            </div>
+
+            <div class="notebook-footer">
+              <button class="clear-btn" type="button" id="clearCompletedBtn">
+                Clear completed
+              </button>
+              <span class="hint-text">Overdue tasks glow red so you can’t ignore them.</span>
+            </div>
+          </div>
         </section>
 
-        <aside class="side-panel">
-          <div class="side-card">
-            <div class="side-header">
-              <span class="side-title">Selected day</span>
-              <span class="side-date" id="selectedDateLabel">Select a day</span>
-            </div>
-            <p class="side-count"><span id="selectedCount">0</span> tasks</p>
-            <ul id="selectedList" class="task-list"></ul>
-            <p class="side-empty" id="selectedEmpty">No tasks for this day.</p>
+        <!-- Right column: notes -->
+        <aside class="notes-panel">
+          <div class="notes-header">
+            <span class="notes-title">Notes</span>
+            <span class="notes-tagline">Quick thoughts for today.</span>
           </div>
-
-          <div class="side-card">
-            <div class="side-header">
-              <span class="side-title">From your planner</span>
-            </div>
-            <p class="side-note">
-              This calendar reads tasks from your Complete planner (same device, same browser).
-            </p>
-          </div>
+          <textarea
+            id="notesArea"
+            class="notes-area"
+            placeholder="Write anything you want to remember…"
+          ></textarea>
+          <p class="notes-hint">Notes save automatically in this browser.</p>
         </aside>
       </main>
     </div>
   </div>
 
-  <script src="calendar.js"></script>
+  <script src="planner.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js").catch((err) => {
